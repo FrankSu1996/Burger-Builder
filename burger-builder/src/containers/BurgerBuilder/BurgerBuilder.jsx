@@ -21,7 +21,10 @@ class BurgerBuilder extends Component {
       meat: 0
     },
     totalPrice: 3,
-    purchasable: false
+    //purchasable = can burger be purchased?
+    //purchasing = order now button clicked, displays modal with order summary
+    purchasable: false,
+    purchasing: false
   };
 
   //function to update purchasable state attribute if burger has at least 1 ingredient
@@ -71,6 +74,10 @@ class BurgerBuilder extends Component {
     this.updatePurchaseState(updatedIngredients);
   };
 
+  purchaseHandler = () => {
+    this.setState({ purchasing: true });
+  };
+
   render() {
     const disabledInfo = {
       ...this.state.ingredients
@@ -82,11 +89,12 @@ class BurgerBuilder extends Component {
 
     return (
       <React.Fragment>
-        <Modal>
+        <Modal show={this.state.purchasing}>
           <OrderSummary ingredients={this.state.ingredients} />
         </Modal>
         <Burger ingredients={this.state.ingredients}></Burger>
         <BuildControls
+          ordered={this.purchaseHandler}
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHanlder}
           disabled={disabledInfo}
