@@ -12,6 +12,7 @@ const controls = [
 
 const buildControls = props => (
   <div className={styles.BuildControls}>
+    <p>Current Price: {props.price}</p>
     {/* Map controls array to BuildControl component */}
     {controls.map(ctrl => {
       return (
@@ -20,6 +21,7 @@ const buildControls = props => (
           label={ctrl.label}
           added={() => props.ingredientAdded(ctrl.type)}
           removed={() => props.ingredientRemoved(ctrl.type)}
+          disabled={props.disabled[ctrl.type]}
         />
       );
     })}
