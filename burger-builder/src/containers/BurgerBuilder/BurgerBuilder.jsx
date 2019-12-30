@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 //mapping of ingredients to prices
 const INGREDIENT_PRICES = {
@@ -22,15 +24,12 @@ class BurgerBuilder extends Component {
     purchasable: false
   };
 
+  //function to update purchasable state attribute if burger has at least 1 ingredient
   updatePurchaseState(ingredients) {
     //obtain sum of all ingredients
-    const sum = Object.keys(ingredients)
-      .map(igKey => {
-        return ingredients[igKey];
-      })
-      .reduce((sum, el) => {
-        return (sum += el);
-      }, 0);
+    const sum = Object.values(ingredients).reduce((sum, el) => {
+      return (sum += el);
+    }, 0);
     this.setState({ purchasable: sum > 0 });
   }
 
@@ -83,6 +82,9 @@ class BurgerBuilder extends Component {
 
     return (
       <React.Fragment>
+        <Modal>
+          <OrderSummary ingredients={this.state.ingredients} />
+        </Modal>
         <Burger ingredients={this.state.ingredients}></Burger>
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
