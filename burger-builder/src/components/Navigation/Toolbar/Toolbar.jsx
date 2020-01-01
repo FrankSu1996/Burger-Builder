@@ -8,7 +8,7 @@ const toolbar = props => (
     <div>MENU</div>
     <Logo></Logo>
     <nav>
-      <NavigationItems></NavigationItems>
+      <NavigationItems />
     </nav>
   </header>
 );
