@@ -1,7 +1,6 @@
 import React from "react";
 import burgerLogo from "../../Assets/images/burger-logo.png";
 import styles from "./Logo.module.css";
-import { tsPropertySignature } from "@babel/types";
 
 const logo = props => (
   <div className={styles.Logo} style={{ height: props.height }}>
